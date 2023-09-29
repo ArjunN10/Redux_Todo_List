@@ -13,9 +13,10 @@ const todoSlice = createSlice({
 
             addtodo: (state,action)=>{
                 state.todos.push({id:Date.now(),value:action.payload ,editkey:true})
-                console.log(action)
+                // console.log(action)
             },
-            
+
+
             edittodo: (state,action)=>{
              state.todos.find((item)=>{
                 if(item.id == action.payload){
@@ -23,11 +24,13 @@ const todoSlice = createSlice({
                 }
             })
             },
+
             deletetodo: (state,action)=>{
                 console.log(action);
                const filterprd= state.todos.filter((item)=> item.id != action.payload)
                state.todos=filterprd
             },
+
             savetodo: (state,action)=>{
                 state.todos.find((item)=>{
                     if(item.id == action.payload.id){
@@ -38,6 +41,7 @@ const todoSlice = createSlice({
                 })
               
             },
+            
             }
         }
 )
