@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addtodo, deletetodo, edittodo, savetodo } from "./components/Todo";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import {
   MDBBtn,
   MDBCard,
@@ -15,7 +15,6 @@ function App() {
   const myRef = useRef();
   const todo = useSelector((state) => state.list.todos);
   const dispatch = useDispatch();
-  const [editValue, setEditValue] = useState("");
 
   const add = (e) => {
     e.preventDefault();
@@ -29,11 +28,6 @@ function App() {
     dispatch(savetodo({ id: id, value: saveValue }));
   };
 
-  const handleEditClick = (id, value) => {
-    // When the "Edit" button is clicked, set the edited value in the state
-    setEditValue(value);
-    dispatch(edittodo(id)); // Dispatch the edit action
-  };
 
   return (
     <div>
@@ -58,6 +52,7 @@ function App() {
                             className="form-control form-control-lg"
                             placeholder="Add new..."
                             id="todo"
+                            required
                           />
                           <div className="mx-2">
                             <MDBBtn>Add</MDBBtn>
@@ -66,47 +61,69 @@ function App() {
                       </MDBCardBody>
                     </MDBCard>
                   </form>
-                  
-                  <ul type="square" >
+
+
+                  <ol className="mt-5">
                     {todo.map((todos) => (
                       <li className="  my-3" key={todos.id}>
                         {todos.editkey === true ? (
                           <>
-                            <span>{todos.value}</span>
+                              <input
+                              type="text"
+                              className="form-control form-control-lg sm-12 lg-2 md-3" style={{maxWidth:'400px',maxHeight:'100vh'}}
+                              ref={myRef}
+                              value={todos.value}
+                               />
                             <MDBBtn
                               className="delete mx-3 bg-danger"
                               onClick={() => dispatch(deletetodo(todos.id))}
                             >
                               Delete
+                            <MDBIcon
+                            fas
+                            icon="trash-alt"
+                            color="white"
+                            size="lg"
+                            className="ms-1"
+                          />
                             </MDBBtn>
+                            <MDBBtn
+                          className="edit mx-2 bg-dark"
+                          onClick={() =>dispatch(edittodo(todos.id))}
+                        >
+                          <MDBIcon
+                        fas
+                        icon="pencil-alt"
+                        className="me-1"
+                        color="info"
+                        />
+                        Edit
+                        </MDBBtn>
                           </>
                         ) : (
                           <>
                             <input
                               type="text"
-                              className="form-control form-control-lg w-50"
+                              className="form-control form-control-lg sm-12 lg-2 md-3" style={{maxWidth:'400px',maxHeight:'100vh'}}
                               ref={myRef}
-                              value={editValue}
-                              onChange={(e) => setEditValue(e.target.value)}
                             />
                             <MDBBtn
-                              className="mx-2 bg-success"
+                              className="mx-2 mt-2 bg-success"
                               type="button"
                               onClick={() => save(todos.id)}
                             >
                               Save
+                              <MDBIcon
+                               fas icon="check"
+                               className="ms-1"
+                               alt='icon' />
                             </MDBBtn>
                           </>
                         )}
-                        <MDBBtn
-                          className="edit mx-2 bg-dark"
-                          onClick={() => handleEditClick(todos.id, todos.value)}
-                        >
-                          Edit
-                        </MDBBtn>
+                       
                       </li>
                     ))}
-                  </ul>
+                  </ol>
                   </div>
               </MDBCardBody>
             </MDBCard>
