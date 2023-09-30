@@ -12,7 +12,7 @@ import {
 } from "mdb-react-ui-kit";
 
 function App() {
-  const myRef = useRef();
+  const myRef = useRef(null);
   const todo = useSelector((state) => state.list.todos);
   const dispatch = useDispatch();
 
@@ -26,6 +26,10 @@ function App() {
   const save = (id) => {
     const saveValue = myRef.current.value;
     dispatch(savetodo({ id: id, value: saveValue }));
+  };
+
+  const focusInput = () => {
+    myRef.current.focus();
   };
 
 
@@ -73,6 +77,7 @@ function App() {
                               className="form-control form-control-lg sm-12 lg-2 md-3" style={{maxWidth:'400px',maxHeight:'100vh'}}
                               ref={myRef}
                               value={todos.value}
+                              required
                                />
                             <MDBBtn
                               className="delete mx-3 bg-danger"
@@ -89,7 +94,8 @@ function App() {
                             </MDBBtn>
                             <MDBBtn
                           className="edit mx-2 bg-dark"
-                          onClick={() =>dispatch(edittodo(todos.id))}
+                          onClick={() =>dispatch(edittodo(todos.id))
+                          }
                         >
                           <MDBIcon
                         fas
@@ -106,6 +112,7 @@ function App() {
                               type="text"
                               className="form-control form-control-lg sm-12 lg-2 md-3" style={{maxWidth:'400px',maxHeight:'100vh'}}
                               ref={myRef}
+                              required
                             />
                             <MDBBtn
                               className="mx-2 mt-2 bg-success"
