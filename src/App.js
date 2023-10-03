@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addtodo, deletetodo, edittodo, savetodo } from "./components/Todo";
-import { useRef } from "react";
+import {  useRef } from "react";
 import {
   MDBBtn,
   MDBCard,
@@ -28,9 +28,6 @@ function App() {
     dispatch(savetodo({ id: id, value: saveValue }));
   };
 
-  const focusInput = () => {
-    myRef.current.focus();
-  };
 
 
   return (
@@ -82,6 +79,7 @@ function App() {
                             <MDBBtn
                               className="delete mx-3 bg-danger"
                               onClick={() => dispatch(deletetodo(todos.id))}
+
                             >
                               Delete
                             <MDBIcon
@@ -95,6 +93,7 @@ function App() {
                             <MDBBtn
                           className="edit mx-2 bg-dark"
                           onClick={() =>dispatch(edittodo(todos.id))
+                          
                           }
                         >
                           <MDBIcon
