@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { addtodo, deletetodo, edittodo, savetodo } from "./components/Todo";
-import {  useRef } from "react";
+import {   useRef } from "react";
 import {
   MDBBtn,
   MDBCard,
@@ -36,11 +36,11 @@ function App() {
         <MDBRow className="d-flex justify-content-center align-items-center h-100">
           <MDBCol>
             <MDBCard
-              style={{ borderRadius: ".75rem", backgroundColor: "#eff1f2" }}
+              style={{ borderRadius: ".75rem", backgroundColor: "#352F44" }}
               >
               <MDBCardBody className="py-4 px-4 px-md-5">
                 <p className="h1 text-center mt-3 mb-4 pb-3 text-primary">
-                  <MDBIcon fas icon="check-square" className="me-1" />
+                  <MDBIcon fas icon="check-square" color='success' className="me-1" />
                   <u>Todo-App</u>
                 </p>
                 <div className="pb-2">
@@ -66,7 +66,7 @@ function App() {
 
                   <ol className="mt-5">
                     {todo.map((todos) => (
-                      <li className="  my-3" key={todos.id}>
+                      <li className="  my-3 " key={todos.id}>
                         {todos.editkey === true ? (
                           <>
                               <input
@@ -77,7 +77,7 @@ function App() {
                               required
                                />
                             <MDBBtn
-                              className="delete mx-3 bg-danger"
+                              className="delete mx-3 mt-3 bg-danger"
                               onClick={() => dispatch(deletetodo(todos.id))}
 
                             >
@@ -91,7 +91,7 @@ function App() {
                           />
                             </MDBBtn>
                             <MDBBtn
-                          className="edit mx-2 bg-dark"
+                          className="edit mx-2 mt-3 bg-dark"
                           onClick={() =>dispatch(edittodo(todos.id))
                           
                           }
