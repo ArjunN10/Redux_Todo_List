@@ -64,7 +64,7 @@ function App() {
                   </form>
 
 
-                  <ol className="mt-5">
+                  <ol className="mt-5 text-white "  style={{fontSize:'20px'}}>
                     {todo.map((todos) => (
                       <li className="  my-3 " key={todos.id}>
                         {todos.editkey === true ? (
